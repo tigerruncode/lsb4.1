@@ -1,0 +1,224 @@
+####LSB4.1系统测试用例
+
+
+Summary:15标准符合性-01LSB4标准-01系统中LSB组件的安装 
+Action：
+
+1.LSB被测组件的安装
+重新配置yum源，修改为
+ # cat /etc/yum.repos.d/ns7-mips.repo
+[ns7-mips64el-os]
+name=NeoKylin Linux Advanced Server 7 - Os
+baseurl=http://10.1.60.20/kojifiles/repos/ns7.4-build/latest/mips64el/
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-neokylin-release
+enabled=1
+2.终端执行命令
+#yum clean all
+#yum makecache
+执行命令
+#yum list *lsb*
+#yum install *lsb*
+#rpm -qa |grep lsb
+Effect:
+1.步骤一后，网络yum源配置正常，无错误，则进行下一步安装lsb组件；
+2.步骤二后，系统中LSB组件已安装完成；
+# rpm -qa |grep neokylin-lsb
+neokylin-lsb-debuginfo-4.1-27.ns7_4.4.mips64el
+neokylin-lsb-submod-security-4.1-27.ns7_4.4.mips64el
+neokylin-lsb-desktop-4.1-27.ns7_4.4.mips64el
+neokylin-lsb-submod-multimedia-4.1-27.ns7_4.4.mips64el
+neokylin-lsb-core-4.1-27.ns7_4.4.mips64el
+neokylin-lsb-languages-4.1-27.ns7_4.4.mips64el
+neokylin-lsb-printing-4.1-27.ns7_4.4.mips64el
+neokylin-lsb-trialuse-4.1-27.ns7_4.4.mips64el
+neokylin-lsb-cxx-4.1-27.ns7_4.4.mips64el
+neokylin-lsb-4.1-27.ns7_4.4.mips64el
+neokylin-lsb-supplemental-4.1-27.ns7_4.4.mips64el
+
+
+
+
+
+
+ 
+Summary:15标准符合性-01.LSB4.1标准-02.LSB4.1测试工具的安装和配置-01LSB官网的LSB4.1的二进制包安装
+ 
+Action：
+ 1.对从LSB官网的获取的LSB4.1的测试工具进行安装；
+打开终端安装LSB4.1的二进制包
+#rpm -ivh lsb*
+lsb-libchk-5.0.3-1.nd7.7.mips64el
+lsb-xdg-utils-4.0.0-2.mips64el
+lsb-build-c++-5.0.0-1.01.mips64el
+lsb-build-base-5.0.5-3.ns7_4.7.mips64el
+lsb-tet3-lite-debuginfo-3.7-15.lsb4.ns7_4.2.mips64el
+lsb-runner-5.0.5-3.ns7_4.7.mips64el
+lsb-test-perl-4.1.8-1.noarch
+lsb-tet3-lite-3.7-15.lsb4.ns7_4.2.mips64el
+lsb-build-cc-5.0.5-3.ns7_4.7.mips64el
+lsb-xdg-utils-debuginfo-4.0.0-2.mips64el
+lsb-build-desktop-5.0.5-3.ns7_4.7.mips64el
+lsb-setup-4.1.0-1.ns7_4.2.noarch
+lsb-build-c++-debuginfo-5.0.0-1.01.mips64el
+lsb-tet3-lite-devel-3.7-15.lsb4.ns7_4.2.mips64el
+Effect：
+1.步骤1之后；
+从LSB官网的LSB4.1的二进制包安装正常，无报错；
+# rpm -qa |grep lsb
+lsb-libchk-5.0.3-1.nd7.7.mips64el
+lsb-xdg-utils-4.0.0-2.mips64el
+lsb-build-c++-5.0.0-1.01.mips64el
+lsb-build-base-5.0.5-3.ns7_4.7.mips64el
+lsb-tet3-lite-debuginfo-3.7-15.lsb4.ns7_4.2.mips64el
+lsb-runner-5.0.5-3.ns7_4.7.mips64el
+lsb-test-perl-4.1.8-1.noarch
+lsb-tet3-lite-3.7-15.lsb4.ns7_4.2.mips64el
+lsb-build-cc-5.0.5-3.ns7_4.7.mips64el
+lsb-xdg-utils-debuginfo-4.0.0-2.mips64el
+lsb-build-desktop-5.0.5-3.ns7_4.7.mips64el
+lsb-setup-4.1.0-1.ns7_4.2.noarch
+lsb-build-c++-debuginfo-5.0.0-1.01.mips64el
+lsb-tet3-lite-devel-3.7-15.lsb4.ns7_4.2.mips64el
+
+
+
+
+
+
+
+Summary:15标准符合性-01.LSB4.1标准-02.LSB4.1测试工具的安装和配置-02LSB4.1测试工具的安装和配置 
+Action：
+ 1.对从LSB官网的获取的LSB4.1的测试工具进行安装；
+打开终端安装LSB4.1的二进制包
+#tar -xvf lsb-dist-checker7.4.tar
+2.配置
+#cd lsb-dist-checker7.4
+#cp -r opt/lsb/test/ /opt/lsb/
+#cp -r var/opt /var/
+#cp -r etc/opt/lsb/ /etc/opt/
+Effect：
+1.步骤1之后,lsb-dist-checker7.4目录下存在opt，var，etc这3个目录； 
+2.步骤2之后，文件已复制到指定位置。 
+
+Summary:15标准符合性-01.LSB4.1标准-02.LSB4.1测试工具的安装和配置-03 LSB4.1测试工具的配置 
+Action：
+1.获取最新的测试套件清单 
+# wget http://ftp.linuxfoundation.org/pub/lsb/updates/dist-checker-data/Manifest 
+2.获取最新的问题库 
+# wget http://ftp.linuxfoundation.org/pub/lsb/updates/dist-checker-data/problem_db2
+3.用准备好的最新版本的 Manifest 替换原测试组件清单 Manifest 
+# cp Manifest /var/opt/lsb/test/manager/manifest/Manifest 
+4.用准备好的最新版本的问题库 problem_db2 替换原问题库 
+# cp problem_db2 /var/opt/lsb/test/manager/problem_db/problem_db2 
+Effect：
+1.步骤1之后，测试套件清单下载正常
+2.步骤2之后，获取最新的问题库下载正常
+3.步骤3之后，/var/opt/lsb/test/manager/manifest/Manifest为最新的
+4.步骤4之后，/var/opt/lsb/test/manager/problem_db/problem_db2为最新的
+
+
+Summary:15标准符合性-01.LSB4.1标准-02.LSB4.1测试工具的安装和配置-04LSB4.1测试工具的服务
+Summary:15标准符合性-01LSB4标准-01系统中LSB组件的安装 
+Action：
+
+1.LSB被测组件的安装
+重新配置yum源，修改为
+ # cat /etc/yum.repos.d/ns7-mips.repo
+[ns7-mips64el-os]
+name=NeoKylin Linux Advanced Server 7 - Os
+baseurl=http://10.1.60.20/kojifiles/repos/ns7.4-build/latest/mips64el/
+gpgcheck=0
+gpgkey=file:///etc/pki/rp
+Summary:15标准符合性-01LSB4标准-01系统中LSB组件的安装 
+Action：
+
+1.LSB被测组件的安装
+重新配置yum源，修改为
+ # cat /etc/yum.repos.d/ns7-mips.repo
+[ns7-mips64el-os]
+name=NeoKylin Linux Advanced Server 7 - Os
+baseurl=http://10.1.60.20/kojifiles/repos/ns7.4-build/latest/mips64el/
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-neokylin-release
+enabled=1
+2.终端执行命令
+m-gpg/RPM-GPG-KEY-neokylin-release
+enabled=1
+2.终端执行命令
+启动
+Action：
+1. 运行服务 
+# cd /opt/lsb/test/man
+Summary:15标准符合性-01LSB4标准-01系统中LSB组件的安装 
+Action：
+
+1.LSB被测组件的安装
+重新配置yum源，修改为
+ # cat /etc/yum.repos.d/ns7-mips.repo
+[ns7-mips64el-os]
+name=NeoKylin Linux Advanced Server 7 - Os
+baseurl=http://10.1.60.20/kojifiles/repos/ns7.4-build/latest/mips64el/
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-neokylin-release
+enabled=1
+2.终端执行命令
+ager/bin/ 
+# ./dist-checker-start.pl 
+2.打开浏览器；假设本机ip地址为10.1.60.27
+http://10.1.60.27:/8888
+
+Effect：
+1.
+步骤1之后；正常情况下服务启动正常
+# ./dist-checker-start.pl 
+    The port '8888' will be used by the Distribution Checker's web-UI server.
+    If you want to change this, run ./dist-checker-start.pl <port>
+
+    Error: An instance of Distribution Checker is running on the port '8888' already! (PID: 4223.)
+
+    If you wish to use it, please open the URL http://b12lsb4pass6027:8888/ in your browser.
+2.步骤2之后；浏览器显示如下
+
+
+
+
+
+
+Summary:15标准符合性-01.LSB4.1标准-03.LSB4.1测试组件开始测试
+
+Action：
+ 
+1.终端执行# ./dist-checker-start.pl 
+服务运行以后，开始测试； 
+2.终端执行
+#/opt/lsb/bin/lsblibchk -r 4.0
+
+
+ Effect：
+1、步骤1之后；
+# ./dist-checker-start.pl 
+    The port '8888' will be used by the Distribution Checker's web-UI server.
+    If you want to change this, run ./dist-checker-start.pl <port>
+
+    Error: An instance of Distribution Checker is running on the port '8888' already! (PID: 4223.)
+
+    If you wish to use it, please open the URL http://b12lsb4pass6027:8888/ in your browser.
+
+2、步骤2之后；
+测试开始，在终端输出信息
+
+Summary:15标准符合性-01.LSB4.1标准-04.LSB4.1测试结果提取  
+Action：
+ 
+1.终端执行
+#/opt/lsb/bin/lsblibchk -r 4.0之后
+2.测试结果提取#/opt/lsb-tet3-lite/bin/tjreport journal.libchk 
+3.
+测试结果存放在/opt/lsb-tet3-lite/bin/目录，测试结果保存为/opt/lsb-tet3-lite/bin/journal.libchk，测试完成后将此目录收取，即可做结果分析。
+
+Effect:
+1.测试结束；
+2.步骤2之后，终端会输出测试结果。包括：已测试项目的总数；测试通过的个数和测试不通过的个数等。
+3.得到数据文件/opt/lsb-tet3-lite/bin/journal.libchk。
+
